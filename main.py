@@ -33,6 +33,8 @@ def main():
 
         player.draw(screen)
 
+        player.update(dt)
+
         # method to refresh the screen.
         pygame.display.flip()
         dt = fps.tick(60) / 1000
