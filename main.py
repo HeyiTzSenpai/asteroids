@@ -1,4 +1,5 @@
 import pygame
+
 from constants import *
 
 
@@ -6,21 +7,28 @@ def main():
     # initialize all imported pygame modules
     pygame.init()
 
+    #initialize a pygame.time.Clock object to limit framerate
+    fps = pygame.time.Clock()
+
+    #represent the amount of time that has passed since the last frame was drawn.
+    dt = 0
+
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     print("Starting Asteroids!")
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
 
     while True:
-        #This will check if the user has closed the window and exit the game loop if they do.
-        #It will make the window's close button work.
+        # This will check if the user has closed the window and exit the game loop if they do.
+        # It will make the window's close button work.
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
         screen.fill((0, 0, 0))
 
-        #method to refresh the screen.
+        # method to refresh the screen.
         pygame.display.flip()
+        dt = fps.tick(60) / 1000
 
 
 # This line ensures the main() function is only called when this file is run directly;
