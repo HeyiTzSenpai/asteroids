@@ -1,17 +1,22 @@
 import pygame
 
 from constants import *
+from player import Player
 
 
 def main():
     # initialize all imported pygame modules
     pygame.init()
 
-    #initialize a pygame.time.Clock object to limit framerate
+    # initialize a pygame.time.Clock object to limit framerate
     fps = pygame.time.Clock()
 
-    #represent the amount of time that has passed since the last frame was drawn.
+    # represent the amount of time that has passed since the last frame was drawn.
     dt = 0
+
+    x = SCREEN_WIDTH / 2
+    y = SCREEN_WIDTH / 2
+    player = Player(x, y)
 
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     print("Starting Asteroids!")
@@ -25,6 +30,8 @@ def main():
             if event.type == pygame.QUIT:
                 return
         screen.fill((0, 0, 0))
+
+        player.draw(screen)
 
         # method to refresh the screen.
         pygame.display.flip()
