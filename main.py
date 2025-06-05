@@ -7,6 +7,7 @@ from constants import *
 from player import Player
 from asteroidfield import *
 from shot import *
+from circleshape import *
 
 
 def main():
@@ -26,7 +27,7 @@ def main():
     Player.containers = (updatable_group, drawable_group)
     Asteroid.containers = (asteroids, updatable_group, drawable_group)
     AsteroidField.containers = updatable_group
-    Shot.containers = (shots ,updatable_group, drawable_group)
+    Shot.containers = (shots, updatable_group, drawable_group)
 
     x = SCREEN_WIDTH / 2
     y = SCREEN_WIDTH / 2
@@ -53,6 +54,9 @@ def main():
             if asteroid.colliding(player):
                 print("Game over!")
                 sys.exit(0)
+            for shot in shots:
+                if shot.colliding(asteroid):
+                    asteroid.split()
 
         for drawable in drawable_group:
             drawable.draw(screen)
