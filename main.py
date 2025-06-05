@@ -6,6 +6,7 @@ from asteroid import Asteroid
 from constants import *
 from player import Player
 from asteroidfield import *
+from shot import *
 
 
 def main():
@@ -18,12 +19,14 @@ def main():
     # represent the amount of time that has passed since the last frame was drawn.
     dt = 0
 
+    shots = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
     updatable_group = pygame.sprite.Group()
     drawable_group = pygame.sprite.Group()
     Player.containers = (updatable_group, drawable_group)
     Asteroid.containers = (asteroids, updatable_group, drawable_group)
     AsteroidField.containers = updatable_group
+    Shot.containers = (shots ,updatable_group, drawable_group)
 
     x = SCREEN_WIDTH / 2
     y = SCREEN_WIDTH / 2
