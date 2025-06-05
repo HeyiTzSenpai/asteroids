@@ -1,16 +1,19 @@
 import sys
+from ast import increment_lineno
 
 import pygame
 
 from asteroid import Asteroid
 from constants import *
-from player import Player
+from player import *
 from asteroidfield import *
 from shot import *
 from circleshape import *
 
 
 def main():
+    Player.load_high_score()
+
     # initialize all imported pygame modules
     pygame.init()
 
@@ -45,6 +48,7 @@ def main():
         # It will make the window's close button work.
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                Player.save_high_score()
                 return
         screen.fill((0, 0, 0))
 
@@ -53,10 +57,17 @@ def main():
         for asteroid in asteroids:
             if asteroid.colliding(player):
                 print("Game over!")
+                print(f"Your score was: {player.score} ")
+                print(player.get_high_score())
+                Player.save_high_score()
                 sys.exit(0)
             for shot in shots:
                 if shot.colliding(asteroid):
                     asteroid.split()
+                    player.increment_score()
+                    shot.kill()
+                    break
+
 
         for drawable in drawable_group:
             drawable.draw(screen)
